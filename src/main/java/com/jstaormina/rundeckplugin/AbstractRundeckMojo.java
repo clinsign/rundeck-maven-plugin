@@ -6,7 +6,7 @@ import org.rundeck.api.RundeckClient;
 
 public abstract class AbstractRundeckMojo extends AbstractMojo {
 
-    @Parameter()
+    @Parameter
     private String url;
     @Parameter
     private String token;
