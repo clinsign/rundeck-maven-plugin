@@ -5,7 +5,6 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -22,7 +21,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({RundeckClient.class, RunJobBuilder.class, Thread.class})
+@PrepareForTest({RundeckClient.class, RunJobBuilder.class})
 public class RunJobMojoTest {
 
     private static final String URL = "http://foo.com:8080";
@@ -107,7 +106,7 @@ public class RunJobMojoTest {
         Mockito.verify(mockRundeckClient).runJob(mockRunJob, 5L, TimeUnit.SECONDS);
     }
 
-    @Test(expected=MojoFailureException.class)
+    @Test(expected = MojoFailureException.class)
     public void testMojoFailsWithMojoFailureExceptionWhenRundeckJobFails() throws Exception {
         Mockito.when(mockExecution.getStatus()).thenReturn(RundeckExecution.ExecutionStatus.FAILED);
         mojo.execute();
